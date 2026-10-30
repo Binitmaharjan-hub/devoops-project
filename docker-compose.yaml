@@ -1,0 +1,18 @@
+services:
+  web:
+    build: ./student-ui
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+  backend:
+    build: ./student-backend
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_USER=appuser
+      - DB_PASSWORD=app@password
+      - DB_NAME=student_ui
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
